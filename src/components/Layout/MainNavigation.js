@@ -11,6 +11,8 @@ const MainNavigation = () => {
     authCtx.tokenClear_handler();
   }
 
+  const isLoggedIn = authCtx.isLoggedIn;
+
   return (
     <header className={classes.header}>
       <Link to='/'>
@@ -18,13 +20,13 @@ const MainNavigation = () => {
       </Link>
       <nav>
         <ul>
-          {authCtx.tokenId.trim().length === 0 && <li>
+          {!isLoggedIn && <li>
             <Link to='/auth'>Login</Link>
           </li>}
-          {authCtx.tokenId.trim().length > 0 && <li>
+          {isLoggedIn && <li>
             <Link to='/profile'>Profile</Link>
           </li>}
-          {authCtx.tokenId.trim().length > 0 && <li>
+          {isLoggedIn && <li>
             <button onClick={logout_handler}>Logout</button>
           </li>}
         </ul>

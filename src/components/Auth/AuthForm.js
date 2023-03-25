@@ -17,7 +17,31 @@ const AuthForm = () => {
   const submit_handler = async (e) => {
     e.preventDefault();
     if (isLogin) {
-
+      setLoading(true);
+      const res = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAp4upS2LPL02GaKGSiXEwrjpAyMiY13JM", {
+        method: 'POST',
+        headers: {
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify({
+          email: email.current.value,
+          password: password.current.value,
+          returnSecureToken: true
+        })
+      })
+      if (res.ok) {
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
+        console.log(data.idToken);
+      }
+      else {
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
+        alert(data.error.message);
+      }
+      setLoading(false);
     }
     else {
       setLoading(true);

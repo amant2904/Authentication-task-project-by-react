@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import LoadingSpinner from '../UI/LoadingSpinner';
 
 import classes from './AuthForm.module.css';
+import AuthContext from '../Store/auth-context';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -9,6 +10,8 @@ const AuthForm = () => {
 
   const email = useRef();
   const password = useRef();
+
+  const authCtx = useContext(AuthContext);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -30,10 +33,8 @@ const AuthForm = () => {
         })
       })
       if (res.ok) {
-        console.log(res);
         const data = await res.json();
-        console.log(data);
-        console.log(data.idToken);
+        authCtx.tokenId_handler(data.idToken);
       }
       else {
         console.log(res);

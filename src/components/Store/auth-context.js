@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const AuthContext = React.createContext({
-    tokenId: "",
+    tokenId: null,
     isLoggedIn: false,
     tokenId_handler: () => { },
     tokenClear_handler: () => { }
@@ -10,7 +10,7 @@ const AuthContext = React.createContext({
 export default AuthContext;
 
 const AuthContextProvider = (props) => {
-    const [tokenId, setTokenId] = useState("");
+    const [tokenId, setTokenId] = useState(null);
     const isLoggedIn = !!tokenId; //if token is a string thats not empty, this will return true otherwise this will return false
 
     const tokenId_handler = (id) => {
@@ -18,7 +18,7 @@ const AuthContextProvider = (props) => {
     }
 
     const tokenClear_handler = () => {
-        setTokenId("");
+        setTokenId(null);
     }
     return (
         <AuthContext.Provider value={{

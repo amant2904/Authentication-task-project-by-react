@@ -7,8 +7,8 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const email = useRef("");
-  const password = useRef("");
+  const email = useRef();
+  const password = useRef();
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -16,29 +16,30 @@ const AuthForm = () => {
 
   const submit_handler = async (e) => {
     e.preventDefault();
-    if (email.current.value.includes("@") && password.current.value.trim().length > 0) {
+    if (isLogin) {
+
+    }
+    else {
       setLoading(true);
-      let res = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]", {
+      const res = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAp4upS2LPL02GaKGSiXEwrjpAyMiY13JM", {
         method: 'POST',
         headers: {
           'Content-Type': "application/json"
         },
-        body: {
+        body: JSON.stringify({
           email: email.current.value,
-          password: password.current.value
-        }
-      })
-      let data = await res.json();
-      console.log(data);
-      if (!res.ok) {
-        alert(data.error.message);
+          password: password.current.value,
+          returnSecureToken: true
+        })
+      });
+      if (res.ok) {
+
+      }
+      else {
+        const data = await res.json();
+        alert(data.error.message)
       }
       setLoading(false);
-    }
-    else {
-      setTimeout(() => {
-        alert("Invalid Input")
-      }, 1000)
     }
   }
 

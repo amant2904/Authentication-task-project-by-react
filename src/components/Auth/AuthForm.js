@@ -33,7 +33,9 @@ const AuthForm = () => {
         })
       });
       if (res.ok) {
-
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
       }
       else {
         const data = await res.json();

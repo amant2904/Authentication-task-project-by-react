@@ -24,6 +24,10 @@ const AuthContextProvider = (props) => {
     useEffect(() => {
         let tknId = localStorage.getItem("tokenId");
         setTokenId(tknId);
+
+        setTimeout(() => {
+            localStorage.removeItem("tokenId");
+        }, 60000)
     }, [tokenId])
 
     return (

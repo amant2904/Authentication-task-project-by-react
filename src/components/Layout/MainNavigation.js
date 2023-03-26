@@ -11,6 +11,7 @@ const MainNavigation = () => {
 
   const logout_handler = () => {
     authCtx.tokenClear_handler();
+    localStorage.removeItem("tokenId");
     history.replace("/auth");
   }
 

@@ -37,6 +37,7 @@ const AuthForm = () => {
       if (res.ok) {
         const data = await res.json();
         authCtx.tokenId_handler(data.idToken);
+        localStorage.setItem("tokenId", data.idToken);
         history.push("/profile");
       }
       else {

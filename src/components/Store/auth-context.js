@@ -27,7 +27,7 @@ const AuthContextProvider = (props) => {
 
         setTimeout(() => {
             localStorage.removeItem("tokenId");
-        }, 60000)
+        }, 300000)
     }, [tokenId])
 
     return (

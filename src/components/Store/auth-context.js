@@ -25,6 +25,7 @@ const AuthContextProvider = (props) => {
         let tknId = localStorage.getItem("tokenId");
         setTokenId(tknId);
 
+        // Auto logout
         setTimeout(() => {
             localStorage.removeItem("tokenId");
         }, 300000)
